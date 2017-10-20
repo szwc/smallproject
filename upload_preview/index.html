@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片上传前预览</title>
+</head>
+<body>
+	<form action="" enctype="multipart/form-data" method="POST">
+		<input type="file" id="fileup" name="fileup" multiple>
+		<input type="submit" value="提交">
+	</form>
+	
+	<div class="showbox">
+		<ul class="list">
+			
+		</ul>
+	</div>
+
+	<script>
+		var fileupInp = document.getElementById("fileup");
+		console.log(fileupInp);
+		var list = document.getElementsByClassName("list")[0];
+		console.log(list);
+		fileupInp.addEventListener("change",function(){
+			console.log(this.files);
+			showimg(this.files);
+		})
+
+		function showimg(files){
+			var files = files;
+			if(!files.length){
+				console.log("没选中文件");
+				return false;
+			}
+			for(var i=0;i<files.length;i++){
+				var file = files[i];
+				var lidom = document.createElement("li");
+				var imgdom = document.createElement("img");
+				var urlstr = window.URL.createObjectURL(file);
+				imgdom.src = urlstr;
+				imgdom.style.src="200px";
+				lidom.appendChild(imgdom);
+				list.appendChild(lidom);
+			}
+		}
+
+	</script>
+</body>
+</html>
